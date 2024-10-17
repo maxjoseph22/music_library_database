@@ -64,3 +64,18 @@ def test_delete_record(db_connection):
         Artist(2, "ABBA", "Pop"),
         Artist(4, "Nina Simone", "Jazz"),
     ]
+
+def test_find_by_genre_function(db_connection):
+    db_connection.seed("seeds/music_library.sql")
+    repository = ArtistRepository(db_connection)
+    result = repository.find_by_genre("Pop")
+    assert result == [
+        Artist(2, "ABBA", "Pop"),
+        Artist(3, "Taylor Swift", "Pop")
+    ]
+
+def test_find_by_genre_function(db_connection):
+    db_connection.seed("seeds/music_library.sql")
+    repository = ArtistRepository(db_connection)
+    result = repository.find_by_genre("Jazz")
+    assert result == [Artist(4, "Nina Simone", "Jazz")]
